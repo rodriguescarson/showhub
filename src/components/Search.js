@@ -14,7 +14,7 @@ function Search() {
   const fetchSearchResults = async () => {
     try {
       const response = await fetch(
-        `https://showhub-backend.vercel.app/search?query=${encodeURIComponent(searchQuery)}`,
+        `https://showhub-backend.vercel.app/api/search?query=${encodeURIComponent(searchQuery)}`,
         {
           headers: {
             Authorization: `Bearer your-secret-key`, // Replace with your actual JWT token

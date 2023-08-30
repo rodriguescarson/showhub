@@ -8,7 +8,7 @@ function AuthProvider({ children }) {
   // Update the signin function to use your backend authentication
   let signin = async (email, password, callback) => {
     try {
-      const response = await fetch("https://showhub-backend.vercel.app/login", {
+      const response = await fetch("https://showhub-backend.vercel.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
