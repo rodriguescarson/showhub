@@ -2,17 +2,23 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-
+import Snackbar from '@mui/material/Snackbar';
 function Search() {
-  const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [noResultsSnackbarOpen, setNoResultsSnackbarOpen] = useState(false);
+
+
     const fetchSearchResults = () => {
         return null;
     }
   const handleSearch = async () => {
     // Implement search logic
     const results = await fetchSearchResults(searchQuery);
-    setSearchResults(results);
+      setSearchResults(results);
+      if (results.length === 0) {
+        setNoResultsSnackbarOpen(true);
+      }
   };
 
   return (
@@ -29,7 +35,11 @@ function Search() {
             {/* Display result using Material-UI card */}
           </div>
         ))}
-      </div>
+          </div>
+          <Snackbar
+        // Show snackbar for no results
+      />
+
     </div>
   );
 }
