@@ -33,9 +33,9 @@ function Layout() {
             <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" component={Link} to="/search">Search</Button>
             <div>
-          <p>
+          {/* <p>
             Welcome {auth.user}!
-              </p>
+              </p> */}
               </div>
             <Button
               color="inherit"
