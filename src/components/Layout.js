@@ -12,7 +12,7 @@ function Layout() {
       return  <div>
       <AppBar position="static">
         <Toolbar>
-          <span>LOGO</span>
+          <span>ShowHub</span>
           <Box sx={{ flexGrow: 1 }} /> {/* Create a flexible space */}
           <Button color="inherit" component={Link} to="/">Home</Button>
           <Button color="inherit" component={Link} to="/login">Login</Button>

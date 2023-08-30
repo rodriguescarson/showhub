@@ -3,7 +3,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import { TextField, Button, Snackbar } from '@mui/material';
+import { TextField, Button, Snackbar,Container, Box } from '@mui/material';
 import { useAuth } from "../Providers/Auth";
 
 function Login() {
@@ -50,20 +50,27 @@ function Login() {
   };
 
   return (
-    <div>
+    <Container maxWidth="xs">
+    <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
       <form onSubmit={handleLogin}>
         <TextField
           label="Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
+          fullWidth
+          margin="normal"
         />
         <TextField
           label="Password"
           type="password"
           value={password}
           onChange={e => setPassword(e.target.value)}
+          fullWidth
+          margin="normal"
         />
-        <Button type="submit" variant="contained" color="primary">Login</Button>
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          Login
+        </Button>
       </form>
       <Snackbar
         open={snackbarOpen}
@@ -71,7 +78,8 @@ function Login() {
         onClose={handleSnackbarClose}
         message={snackbarMessage}
       />
-    </div>
+    </Box>
+  </Container>
   );
 }
 
