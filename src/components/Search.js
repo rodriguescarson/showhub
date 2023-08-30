@@ -35,7 +35,7 @@ function Search() {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end',marginTop:'20px' }}>
         <TextField
           label="Search TV shows"
           value={searchQuery}
@@ -45,7 +45,7 @@ function Search() {
           Search
         </Button>
       </div>
-      <Grid container spacing={2}>
+      <Grid container spacing={3} p={2}>
         {searchResults.map(result => (
           <Grid item xs={12} sm={6} md={4} key={result.show.id}>
             <Card>
