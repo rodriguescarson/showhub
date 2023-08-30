@@ -5,9 +5,14 @@ import TextField from '@mui/material/TextField';
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = () => {
+    const [searchResults, setSearchResults] = useState([]);
+    const fetchSearchResults = () => {
+        return null;
+    }
+  const handleSearch = async () => {
     // Implement search logic
+    const results = await fetchSearchResults(searchQuery);
+    setSearchResults(results);
   };
 
   return (
@@ -19,7 +24,11 @@ function Search() {
       />
       <Button variant="contained" color="primary" onClick={handleSearch}>Search</Button>
       <div>
-        {/* Display search results using material cards */}
+        {searchResults.map(result => (
+          <div key={result.id}>
+            {/* Display result using Material-UI card */}
+          </div>
+        ))}
       </div>
     </div>
   );
