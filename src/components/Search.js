@@ -7,23 +7,26 @@ function Search() {
   const [noResultsSnackbarOpen, setNoResultsSnackbarOpen] = useState(false);
 
   const fetchSearchResults = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(
-        `https://showhub-backend.vercel.app/api/search?query=${searchQuery}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Replace with your actual JWT token
-          },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      }
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-    }
+      try {
+          const token = localStorage.getItem('token');
+          if (searchQuery) {
+              const response = await fetch(
+                  `https://showhub-backend.vercel.app/api/search?query=${searchQuery}`,
+                  {
+                      headers: {
+                          Authorization: `Bearer ${token}`,
+                      },
+                  }
+              );
+              if (response.ok) {
+                  const data = await response.json();
+                  return data;
+              }
+          }
+          } catch (error) {
+              console.error('Error fetching search results:', error);
+          }
+      
     return [];
   };
 
@@ -35,7 +38,7 @@ function Search() {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'flex-end',marginTop:'20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
         <TextField
           label="Search TV shows"
           value={searchQuery}
@@ -53,12 +56,27 @@ function Search() {
                 component="img"
                 alt={result.show.name}
                 height="200"
-                image={result.show.image?result.show.image.medium:''} // Use the image URL from the JSON data
+                image={result.show.image ? result.show.image.medium : ''}
               />
               <CardContent>
                 <Typography variant="h6">{result.show.name}</Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {result.show.summary.replace(/<[^>]+>/g, '')} {/* Remove HTML tags from summary */}
+                  {result.show.summary.replace(/<[^>]+>/g, '')}
+                </Typography>
+                <Typography variant="body2">
+                  Type: {result.show.type}
+                </Typography>
+                <Typography variant="body2">
+                  Language: {result.show.language}
+                </Typography>
+                <Typography variant="body2">
+                  Genres: {result.show.genres.join(', ')}
+                </Typography>
+                <Typography variant="body2">
+                  Status: {result.show.status}
+                </Typography>
+                <Typography variant="body2">
+                  Schedule: {result.show.schedule.time} {result.show.schedule.days.join(', ')}
                 </Typography>
               </CardContent>
             </Card>
