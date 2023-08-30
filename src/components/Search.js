@@ -12,12 +12,13 @@ function Search() {
   const [noResultsSnackbarOpen, setNoResultsSnackbarOpen] = useState(false);
 
   const fetchSearchResults = async () => {
-    try {
+      try {
+          let token = localStorage.getItem('token');
       const response = await fetch(
-        `https://showhub-backend.vercel.app/api/search?query=${encodeURIComponent(searchQuery)}`,
+        `https://showhub-backend.vercel.app/api/search?query=${searchQuery}`,
         {
           headers: {
-            Authorization: `Bearer your-secret-key`, // Replace with your actual JWT token
+            Authorization: `Bearer ${token}`, // Replace with your actual JWT token
           },
         }
       );

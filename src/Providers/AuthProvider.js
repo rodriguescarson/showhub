@@ -4,7 +4,7 @@ let AuthContext = React.createContext(null);
 
 function AuthProvider({ children }) {
   let [user, setUser] = React.useState(null);
-  
+    let [token, setToken] = React.useState(null);
   // Update the signin function to use your backend authentication
   let signin = async (email, password) => {
     try {
