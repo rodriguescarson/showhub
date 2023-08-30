@@ -53,7 +53,7 @@ function Search() {
                 component="img"
                 alt={result.show.name}
                 height="200"
-                image={result.show.image.medium} // Use the image URL from the JSON data
+                image={result.show.image?result.show.image.medium:''} // Use the image URL from the JSON data
               />
               <CardContent>
                 <Typography variant="h6">{result.show.name}</Typography>

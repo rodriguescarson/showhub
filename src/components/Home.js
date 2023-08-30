@@ -5,12 +5,6 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">ShowHub</Typography>
-          <Button color="inherit" component={Link} to="/login">Login</Button>
-        </Toolbar>
-      </AppBar>
       <Container>
         <Typography variant="h4" align="center" mt={4}>
           Welcome to ShowHub!
