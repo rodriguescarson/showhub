@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Snackbar from '@mui/material/Snackbar';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import { Button, TextField, Snackbar, Card, CardContent, CardMedia, Typography, Grid } from '@mui/material';
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,8 +7,8 @@ function Search() {
   const [noResultsSnackbarOpen, setNoResultsSnackbarOpen] = useState(false);
 
   const fetchSearchResults = async () => {
-      try {
-          let token = localStorage.getItem('token');
+    try {
+      const token = localStorage.getItem('token');
       const response = await fetch(
         `https://showhub-backend.vercel.app/api/search?query=${searchQuery}`,
         {
@@ -40,24 +35,36 @@ function Search() {
 
   return (
     <div>
-      <TextField
-        label="Search TV shows"
-        value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
-      />
-      <Button variant="contained" color="primary" onClick={handleSearch}>
-        Search
-      </Button>
-      <div>
-        {searchResults.map(result => (
-          <Card key={result.show.id} style={{ margin: '10px' }}>
-            <CardContent>
-              <Typography variant="h6">{result.show.name}</Typography>
-              <Typography variant="body2">{result.show.summary}</Typography>
-            </CardContent>
-          </Card>
-        ))}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+        <TextField
+          label="Search TV shows"
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+        />
+        <Button variant="contained" color="primary" onClick={handleSearch}>
+          Search
+        </Button>
       </div>
+      <Grid container spacing={2}>
+        {searchResults.map(result => (
+          <Grid item xs={12} sm={6} md={4} key={result.show.id}>
+            <Card>
+              <CardMedia
+                component="img"
+                alt={result.show.name}
+                height="200"
+                image={result.show.image.medium} // Use the image URL from the JSON data
+              />
+              <CardContent>
+                <Typography variant="h6">{result.show.name}</Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {result.show.summary.replace(/<[^>]+>/g, '')} {/* Remove HTML tags from summary */}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
       <Snackbar
         open={noResultsSnackbarOpen}
         message="No results found"
